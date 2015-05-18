@@ -38,7 +38,11 @@
 #ifndef _ARNETWORKAL_WIFINETWORK_PRIVATE_H_
 #define _ARNETWORKAL_WIFINETWORK_PRIVATE_H_
 
+#ifndef _PSP
 #include <netinet/ip.h>
+#else
+#define IP_MAXPACKET 65535
+#endif
 
 #include <libARNetworkAL/ARNETWORKAL_Manager.h>
 
