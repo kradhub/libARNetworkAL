@@ -1109,6 +1109,10 @@ static int ARNETWORKAL_WifiNetwork_GetAvailableSendSize (ARNETWORKAL_Manager_t *
         return -1;
     }
 
+#if defined(_PSP)
+    /* not supported on PSP */
+    senderObject->socketBufferSize = -1;
+#else
     err = ioctl(sockfd, TIOCOUTQ, &currentBytesInSocket);
     if (err >= 0)
     {
@@ -1130,6 +1134,7 @@ static int ARNETWORKAL_WifiNetwork_GetAvailableSendSize (ARNETWORKAL_Manager_t *
             senderObject->socketBufferSize = -1;
         }
     }
+#endif
 
     return available;
 }
